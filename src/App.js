@@ -7,7 +7,7 @@ import {
 
 import { RunesEnchantPage, UtilitiesPage, HomePage } from './Pages'
 import { Header } from './Components'
-import { RunesFormat } from './Services'
+import { RunesFormat, RuneCraftFormat, LocalStorage } from './Services'
 
 import './App.scss'
 
@@ -18,42 +18,106 @@ import '@fortawesome/fontawesome-free/js/all.js'
 const App = () => {
   const [json, setJson] = useState({})
 
+  const [loaded, setLoaded] = useState(false)
+  
   const [runes, setRunes] = useState([])
+  const [runeCraft, setRuneCraft] = useState([])
+  const [utilities, setUtilities] = useState([])
 
   useEffect(() => {
-    if(!json.runes) return false
-    console.log(json.runes)
+    // Init cookie utilities
+    if(!LocalStorage.getItem("utilities")) LocalStorage.setItem('utilities', utilities)
+    else setUtilities(LocalStorage.getItem("utilities"))
 
-    const _runes = json.runes.map((item) => {
-      return {
-        ...item,
-        set_label: RunesFormat.getSetLabel(item.set_id),
-        extra_label: RunesFormat.getQualityLabel(item.extra),
-        pri_eff_label: RunesFormat.getStatLabel(item.pri_eff[0]),
-        pri_eff_value: item.pri_eff[1],
-        prefix_eff_label: (item.prefix_eff[0] ? RunesFormat.getStatLabel(item.prefix_eff[0]) : undefined),
-        prefix_eff_value: (item.prefix_eff[0] ? item.prefix_eff[1] : undefined),
-        "ATK%":     RunesFormat.getSubstatValue(item.sec_eff, "ATK%"),
-        "ATK flat": RunesFormat.getSubstatValue(item.sec_eff, "ATK flat"),
-        "DEF%":     RunesFormat.getSubstatValue(item.sec_eff, "DEF%"),
-        "DEF flat": RunesFormat.getSubstatValue(item.sec_eff, "DEF flat"),
-        "HP%":      RunesFormat.getSubstatValue(item.sec_eff, "HP%"),
-        "HP flat":  RunesFormat.getSubstatValue(item.sec_eff, "HP flat"),
-        "SPD":      RunesFormat.getSubstatValue(item.sec_eff, "SPD"),
-        "ACC":      RunesFormat.getSubstatValue(item.sec_eff, "ACC"),
-        "RES":      RunesFormat.getSubstatValue(item.sec_eff, "RES"),
-        "CRate":    RunesFormat.getSubstatValue(item.sec_eff, "CRate"),
-        "CDmg":     RunesFormat.getSubstatValue(item.sec_eff, "CDmg"),
-        efficiency: RunesFormat.getEfficiency(item.prefix_eff, item.sec_eff),
-        efficiency_max: RunesFormat.getEfficiencyMax(item.prefix_eff, item.sec_eff, item.upgrade_curr),
-      }
-    })
+    // Init cookie runes
+    if(!LocalStorage.getItem("runes")) LocalStorage.setItem('runes', runes)
+    else setRunes(LocalStorage.getItem("runes"))
+
+    // Init cookie rune craft
+    if(!LocalStorage.getItem("runeCraft")) LocalStorage.setItem('runeCraft', runeCraft)
+    else setRuneCraft(LocalStorage.getItem("runeCraft"))
+
+    // Set is loaded
+    setLoaded(true)
+
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if(!json.runes) return;
+
+    /* --- RUNE CRAFT --- */
+    // Format rune craft
+    const _runeCraft = RuneCraftFormat.formatRunes(json.rune_craft_item_list)
     
-    // Get file and read this
+    // Set state
+    setRuneCraft(_runeCraft)
+
+    
+    /* --- RUNE --- */
+    // Get rune monster
+    let _runesMonster = []
+    json.unit_list.map((item) => {
+      _runesMonster = _runesMonster.concat(item.runes); return item;
+    })
+
+    // Format runes
+    const _runes = RunesFormat.formatRunes([...json.runes, ...json.rune_lock_list, ..._runesMonster], utilities)
+    
+    // Set state
     setRunes(_runes)
+    
 
     // eslint-disable-next-line
   }, [json]);
+
+  useEffect(() => {
+    if(!loaded) return;
+
+    // Set runes in cookies
+    console.log(runes)
+    LocalStorage.setItem('runes', runes)
+
+    // eslint-disable-next-line
+  }, [runes]);
+
+  useEffect(() => {
+    if(!loaded) return;
+
+    // Set rune craft in cookies
+    console.log(runeCraft)
+    LocalStorage.setItem('runeCraft', runeCraft)
+
+    // eslint-disable-next-line
+  }, [runeCraft]);
+
+  useEffect(() => {
+    if(!loaded) return;
+
+    // Set utilities in cookies
+    LocalStorage.setItem('utilities', utilities)
+    
+    // Format and set state
+    setRunes(RunesFormat.formatRunes(runes, utilities))
+
+    // eslint-disable-next-line
+  }, [utilities]);
+
+  const setUtility = (_utility) => {
+    setUtilities([
+      ...utilities,
+      _utility
+    ])
+  }
+
+  const deleteUtility = (_utility) => {
+    const _utilities = []
+    utilities.map((item) => {
+      if(item.name !== _utility.name) _utilities.push(item); return item;
+    })
+
+    setUtilities(_utilities)
+  }
 
   return (
     <div className="App">
@@ -68,7 +132,7 @@ const App = () => {
             <RunesEnchantPage runes={runes} />
           </Route>
           <Route exact path='/utilities'>
-            <UtilitiesPage />
+            <UtilitiesPage setUtility={setUtility} deleteUtility={deleteUtility} utilities={utilities}/>
           </Route>
         </Switch>
       </Router>

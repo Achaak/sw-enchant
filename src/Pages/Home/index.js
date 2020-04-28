@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import {  } from './../../Components'
@@ -21,6 +21,8 @@ const Home = ({ setJson }) => {
       const _text = (e.target.result)
 
       const _json = JSON.parse(_text)
+
+      console.log(_json)
 
       // Set json file
       setJson(_json)

@@ -6,8 +6,6 @@ const NewSelect = ({
   options, noOptionsMessage, className, placeholder, label, onChange, onBlur, name, required, value, isMulti,
   ...props
 }) => {
-  console.log(props, onBlur)
-
   const handleChange = (value) => {
     onChange(value)
   }
@@ -35,7 +33,7 @@ NewSelect.propTypes = {
   onBlur: PropTypes.func,
   name: PropTypes.string,
   required: PropTypes.bool,
-  value: PropTypes.object,
+  value: PropTypes.any,
   isMulti: PropTypes.bool,
 }
 

@@ -37,6 +37,7 @@ const getSetLabel = (idSet) => {
     case 21: _setLabel = "Enhance";       break;
     case 22: _setLabel = "Accuracy";      break;
     case 23: _setLabel = "Tolerance";     break;
+    default:  _setLabel = "Null"; break;
   }
 
   return _setLabel
@@ -57,6 +58,7 @@ const getStatLabel = (idStat) => {
       case 10: _statsLabel = "CDmg";     break;
       case 11: _statsLabel = "RES";      break;
       case 12: _statsLabel = "ACC";      break;
+      default:  _statsLabel = "Null"; break;
   }
 
   return _statsLabel;
@@ -81,7 +83,6 @@ const getSubstatValue = (substats, substatsLabel) => {
   for (let i = 0; i < substats.length; i++) {
     const substat = substats[i];
     
-    console.log()
     if(getStatLabel(substat[0]) === substatsLabel) return substat[1]+substat[3]
   }
   return undefined
@@ -124,8 +125,7 @@ const getEfficiencyMax = (prefix_eff, substats, level) => {
 
     _value += (substat[1]+substat[3]) / maxValue[getStatLabel(substat[0])]    
   }
-
-  console.log(level)
+  
   if(level < 12) _value += Math.ceil(((12-level)/3)) * 0.2
 
   let _efficiency = (_value+1)/2.8;
@@ -136,6 +136,127 @@ const getEfficiencyMax = (prefix_eff, substats, level) => {
   return _efficiency;
 }
 
+const getStatsLabel = (pri_eff, prefix_eff, substats) => {
+  let statsLabel = []
+
+  // Primary stats
+  statsLabel.push(getStatLabel(pri_eff[0]))
+
+  // Prefix stats
+  if(prefix_eff[0]) statsLabel.push(getStatLabel(prefix_eff[0]))
+
+  // Substat
+  for (let i = 0; i < substats.length; i++) {
+    const substat = substats[i];
+
+    statsLabel.push(getStatLabel(substat[0]))
+  }
+
+  return statsLabel
+}
+
+const getMinStat = (substats) => {
+  let _minStat = {
+    label: 'none',
+    value: 1
+  };
+
+  for (let i = 0; i < substats.length; i++) {
+    const _substat = substats[i];
+
+    const _statLabel = getStatLabel(_substat[0])
+    const _perc = (_substat[1]+_substat[3]) / maxValue[_statLabel]
+
+    if(_minStat.value > _perc) _minStat = {
+      label: _statLabel,
+      value: _perc
+    }
+  }
+
+  return _minStat.label
+}
+
+const getIsEnchant = (substats) => {
+  let _enchant = null
+
+  for (let i = 0; i < substats.length; i++) {
+    const _substat = substats[i];
+    
+    if(_substat[2]) _enchant = {
+      label:  getStatLabel(_substat[0]),
+      value: _substat[1],
+      valueGrind: _substat[1]+_substat[3]
+    }
+  }
+
+  console.log(_enchant)
+  return _enchant
+}
+
+const getUtilities = (statsLabel, utilities) => {
+
+  // Get utilities
+  let _runeUtilities = []
+  for (let i = 0; i < utilities.length; i++) {
+    const _utility = utilities[i];
+    
+    const _same_stats = _utility.stats.filter(x => statsLabel.includes(x));
+    console.log(_same_stats)
+    if(_same_stats.length >= _utility.nb_stats) _runeUtilities.push(_utility.name)
+  }
+
+  return _runeUtilities
+}
+
+const getEnchantAdvice = (statsLabel, minStat, isEnchant, utilities) => {
+  for (let i = 0; i < utilities.length; i++) {
+    const _utility = utilities[i];
+    
+    if(isEnchant) {
+
+    }
+    else {
+
+    }
+    //console.log(statsLabel, _utility.stats.filter(x => !statsLabel.includes(x)))
+  }
+}
+
+const formatRunes = (runes, utilities) => {
+  const _runes = runes.map((item) => {
+    const _statsLabel = getStatsLabel(item.pri_eff, item.prefix_eff, item.sec_eff)
+    const _minStat = getMinStat(item.sec_eff)
+    const _isEnchant = getIsEnchant(item.sec_eff)
+
+    return {
+      ...item,
+      set_label: getSetLabel(item.set_id),
+      extra_label: getQualityLabel(item.extra),
+      pri_eff_label: getStatLabel(item.pri_eff[0]),
+      pri_eff_value: item.pri_eff[1],
+      prefix_eff_label: (item.prefix_eff[0] ? getStatLabel(item.prefix_eff[0]) : undefined),
+      prefix_eff_value: (item.prefix_eff[0] ? item.prefix_eff[1] : undefined),
+      "ATK%":     getSubstatValue(item.sec_eff, "ATK%"),
+      "ATK flat": getSubstatValue(item.sec_eff, "ATK flat"),
+      "DEF%":     getSubstatValue(item.sec_eff, "DEF%"),
+      "DEF flat": getSubstatValue(item.sec_eff, "DEF flat"),
+      "HP%":      getSubstatValue(item.sec_eff, "HP%"),
+      "HP flat":  getSubstatValue(item.sec_eff, "HP flat"),
+      "SPD":      getSubstatValue(item.sec_eff, "SPD"),
+      "ACC":      getSubstatValue(item.sec_eff, "ACC"),
+      "RES":      getSubstatValue(item.sec_eff, "RES"),
+      "CRate":    getSubstatValue(item.sec_eff, "CRate"),
+      "CDmg":     getSubstatValue(item.sec_eff, "CDmg"),
+      efficiency: getEfficiency(item.prefix_eff, item.sec_eff),
+      efficiency_max: getEfficiencyMax(item.prefix_eff, item.sec_eff, item.upgrade_curr),
+      utilities: getUtilities(_statsLabel, utilities),
+      enchant_advice: getEnchantAdvice(_statsLabel, _minStat, _isEnchant, utilities)
+    }
+  })
+
+  return _runes
+}
+
 export default {
   getSetLabel,
   getStatLabel,
@@ -144,4 +265,5 @@ export default {
   maxValue,
   getEfficiency,
   getEfficiencyMax,
+  formatRunes,
 }

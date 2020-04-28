@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
-import { Table, DrawerUtility, Select } from './../../Components'
+import { Table, Select } from './../../Components'
 
 const SelectStats = ({...props}) => {
   return (
@@ -24,15 +24,20 @@ const SelectStats = ({...props}) => {
   )
 }
 
-const Utilities = () => {
-  const [tableLoading, setTableLoading] = useState(false)
-  const drawerUtilityRef = useRef(null)
+const Utilities = ({ 
+  setUtility, deleteUtility, utilities
+}) => {
 
   const setUtilities = (item) => {
-    console.log({
+    setUtility({
       name: item.name,
-      stats: (item.stats ? item.stats.map((o) => o.value) : [])
+      stats: (item.stats ? item.stats.map((o) => o.value) : []),
+      nb_stats: item.nb_stats || 0
     })
+  }
+
+  const getStatsRender = (item) => {
+    return (item.stats.join(", "))
   }
 
   return (
@@ -41,17 +46,15 @@ const Utilities = () => {
         columns={[
           { title: 'Id', field: 'rune_id', type: 'numeric', hidden: true },
           { title: 'Name', field: 'name',  type: 'string' },
-          { title: 'Stats', field: 'stats',  type: 'string', editComponent: props => (<SelectStats {...props} />) },
+          { title: 'Stats', field: 'stats',  type: 'string', editComponent: props => (<SelectStats {...props} />), render: getStatsRender},
+          { title: 'Number of stats', field: 'nb_stats',  type: 'numeric' },
         ]}
-        data={[]}
+        data={utilities}
+        isLoading={false}
         title="Utilities list"
-        isLoading={tableLoading}
         pageSize={10}
         onRowAdd={setUtilities}
-      />
-
-      <DrawerUtility
-        ref={drawerUtilityRef}
+        onRowDelete={deleteUtility}
       />
     </div>
   )

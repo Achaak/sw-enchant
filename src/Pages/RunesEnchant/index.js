@@ -1,9 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Table } from './../../Components'
 
 const RunesEnchant = ({ runes }) => {
-  const [tableLoading, setTableLoading] = useState(runes.length !== 0)
+  const [tableLoading, setTableLoading] = useState(runes.length === 0)
+
+  useEffect(() => {
+    // Get file and read this
+    setTableLoading(runes.length === 0)
+
+    // eslint-disable-next-line
+  }, [runes]);
+
+  const utilitiesRender = (item) => {
+    let _utilities = []
+
+    for (let i = 0; i < item.utilities.length; i++) {
+    _utilities.push(<li key={i}>{ item.utilities[i] }</li>)
+    }
+
+    return (
+      <ul>
+        {_utilities}
+      </ul>
+    )
+  }
 
   return (
     <section className="container">
@@ -32,6 +53,8 @@ const RunesEnchant = ({ runes }) => {
           { title: 'RES',   field: 'RES',      type: 'string' },
           { title: 'CRate', field: 'CRate',    type: 'string' },
           { title: 'CDmg',  field: 'CDmg',     type: 'string' },
+          { title: 'Enchantment advice',  field: 'enchant_advice', type: 'string' },
+          { title: 'Utilities', field: 'utilities', type: 'string', render: utilitiesRender },
         ]}
         data={runes}
         title="Runes list"
