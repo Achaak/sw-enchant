@@ -26,6 +26,10 @@ const RunesEnchant = ({ runes }) => {
     )
   }
 
+  const enchantsAdviceRender = (item) => {
+    return (<></>)
+  }
+
   return (
     <section className="container">
       <Table
@@ -53,7 +57,7 @@ const RunesEnchant = ({ runes }) => {
           { title: 'RES',   field: 'RES',      type: 'string' },
           { title: 'CRate', field: 'CRate',    type: 'string' },
           { title: 'CDmg',  field: 'CDmg',     type: 'string' },
-          { title: 'Enchantment advice',  field: 'enchant_advice', type: 'string' },
+          { title: 'Enchantment advice',  field: 'enchant_advice', type: 'string', render: enchantsAdviceRender },
           { title: 'Utilities', field: 'utilities', type: 'string', render: utilitiesRender },
         ]}
         data={runes}

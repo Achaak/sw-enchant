@@ -140,10 +140,10 @@ const getStatsLabel = (pri_eff, prefix_eff, substats) => {
   let statsLabel = []
 
   // Primary stats
-  statsLabel.push(getStatLabel(pri_eff[0]))
+  if(pri_eff) statsLabel.push(getStatLabel(pri_eff[0]))
 
   // Prefix stats
-  if(prefix_eff[0]) statsLabel.push(getStatLabel(prefix_eff[0]))
+  if(prefix_eff && prefix_eff[0]) statsLabel.push(getStatLabel(prefix_eff[0]))
 
   // Substat
   for (let i = 0; i < substats.length; i++) {
@@ -189,7 +189,6 @@ const getIsEnchant = (substats) => {
     }
   }
 
-  console.log(_enchant)
   return _enchant
 }
 
@@ -201,32 +200,88 @@ const getUtilities = (statsLabel, utilities) => {
     const _utility = utilities[i];
     
     const _same_stats = _utility.stats.filter(x => statsLabel.includes(x));
-    console.log(_same_stats)
+    
     if(_same_stats.length >= _utility.nb_stats) _runeUtilities.push(_utility.name)
   }
 
   return _runeUtilities
 }
 
-const getEnchantAdvice = (statsLabel, minStat, isEnchant, utilities) => {
+const getEnchantAdvice = (pri_eff, prefix_eff, sec_eff, utilities, level) => {
+  let _enchantsAdvice = []
+
+  console.log('--------------')
+  
+  // Verif level
+  if(level < 12) return false
+
+  const _statsLabelWithoutPrefix = getStatsLabel(pri_eff, undefined, sec_eff)
+  const _substatLabel = getStatsLabel(undefined, undefined, sec_eff)
+  const _minStat = getMinStat(sec_eff)
+  const _isEnchant = getIsEnchant(sec_eff)
+  const _substatsFormat = getSubstatsFormat(sec_eff)
+
   for (let i = 0; i < utilities.length; i++) {
     const _utility = utilities[i];
     
-    if(isEnchant) {
+    if(_isEnchant) {
 
     }
     else {
+      // Verif has minimal number stats
+      const _same_stats = _utility.stats.filter(x => _statsLabelWithoutPrefix.includes(x));
+      
+      let _oldStats = _substatLabel.filter(x => !_utility.stats.includes(x));
+      let _newStats = _utility.stats.filter(x => !_substatLabel.includes(x));
 
+      // Verif has old stats and new stats and nb stats
+      if(
+        _same_stats.length >= parseInt(_utility.nb_stats)-1 &&
+        _oldStats.length &&
+        _newStats.length
+        ) {
+
+        let _utilityEnchant = {
+          name: _utility.name,
+          enchants: []
+        }
+
+        // Set utility enchant
+        _enchantsAdvice.push(_utilityEnchant)
+        console.log(_substatLabel, _oldStats, _newStats)
+      }
     }
     //console.log(statsLabel, _utility.stats.filter(x => !statsLabel.includes(x)))
   }
+
+  console.log(_enchantsAdvice)
+  return _enchantsAdvice
+}
+
+const getSubstatsFormat = (substats) => {
+  let _substatsFormat = []
+
+  for (let i = 0; i < substats.length; i++) {
+    const _substat = substats[i];
+
+    const _label = getStatLabel(_substat[0])
+    
+    _substatsFormat.push({
+      label:  _label,
+      value: _substat[1],
+      value_perc: _substat[1] / maxValue[_label],
+      valueGrind: _substat[1]+_substat[3],
+      valueGrind_perc: (_substat[1]+_substat[3]) / maxValue[_label],
+      isEnchant: _substat[2] === 1,
+    })
+  }
+
+  return _substatsFormat;
 }
 
 const formatRunes = (runes, utilities) => {
   const _runes = runes.map((item) => {
     const _statsLabel = getStatsLabel(item.pri_eff, item.prefix_eff, item.sec_eff)
-    const _minStat = getMinStat(item.sec_eff)
-    const _isEnchant = getIsEnchant(item.sec_eff)
 
     return {
       ...item,
@@ -250,7 +305,7 @@ const formatRunes = (runes, utilities) => {
       efficiency: getEfficiency(item.prefix_eff, item.sec_eff),
       efficiency_max: getEfficiencyMax(item.prefix_eff, item.sec_eff, item.upgrade_curr),
       utilities: getUtilities(_statsLabel, utilities),
-      enchant_advice: getEnchantAdvice(_statsLabel, _minStat, _isEnchant, utilities)
+      enchant_advice: getEnchantAdvice(item.pri_eff, item.prefix_eff, item.sec_eff, utilities, item.upgrade_curr)
     }
   })
 
