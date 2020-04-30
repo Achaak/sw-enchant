@@ -1,0 +1,21 @@
+.table-default {
+  table {
+    td, th {
+      padding: 5px 10px;
+      text-align: center;
+    }
+
+    th {
+      white-space: nowrap;
+    }
+
+    td {
+      ul {
+        li {
+          list-style: none;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

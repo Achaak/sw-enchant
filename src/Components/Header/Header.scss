@@ -1,3 +1,12 @@
+@import './../../Services/Styles/Colors.scss';
+
 header {
-  
+  background-color: $primary-color;
+  padding: 10px;
+
+  a {
+    margin: 10px 15px;
+    color: $quinary-color;
+    font-size: 1.5rem;
+  }
 }

@@ -1,0 +1,367 @@
+$roboto-font-path: "/fonts/Roboto/" !default;
+$open-sans-font-path: "/fonts/Open_Sans/" !default;
+$nunito-font-path: "/fonts/Nunito/" !default;
+
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto Thin), url('#{$roboto-font-path}Roboto-Thin.eot');
+    src: url("#{$roboto-font-path}Roboto-Thin.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-Thin.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-Thin.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-Thin.ttf") format("truetype");
+
+    font-weight: 100;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto ThinItalic), url('#{$roboto-font-path}Roboto-ThinItalic.eot');
+    src: url("#{$roboto-font-path}Roboto-ThinItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-ThinItalic.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-ThinItalic.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-ThinItalic.ttf") format("truetype");
+
+    font-weight: 100;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto Light), url('#{$roboto-font-path}Roboto-Light.eot');
+    src: url("#{$roboto-font-path}Roboto-Light.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-Light.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-Light.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-Light.ttf") format("truetype");
+
+    font-weight: 300;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto LightItalic), url('#{$roboto-font-path}Roboto-LightItalic.eot');
+    src: url("#{$roboto-font-path}Roboto-LightItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-LightItalic.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-LightItalic.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-LightItalic.ttf") format("truetype");
+
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto Regular), url('#{$roboto-font-path}Roboto-Regular.eot');
+    src: url("#{$roboto-font-path}Roboto-Regular.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-Regular.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-Regular.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-Regular.ttf") format("truetype");
+
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto RegularItalic), url('#{$roboto-font-path}Roboto-RegularItalic.eot');
+    src: url("#{$roboto-font-path}Roboto-RegularItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-RegularItalic.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-RegularItalic.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-RegularItalic.ttf") format("truetype");
+
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto Medium), url('#{$roboto-font-path}Roboto-Medium.eot');
+    src: url("#{$roboto-font-path}Roboto-Medium.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-Medium.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-Medium.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-Medium.ttf") format("truetype");
+
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto MediumItalic), url('#{$roboto-font-path}Roboto-MediumItalic.eot');
+    src: url("#{$roboto-font-path}Roboto-MediumItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-MediumItalic.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-MediumItalic.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-MediumItalic.ttf") format("truetype");
+
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto Bold), url('#{$roboto-font-path}Roboto-Bold.eot');
+    src: url("#{$roboto-font-path}Roboto-Bold.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-Bold.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-Bold.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-Bold.ttf") format("truetype");
+
+    font-weight: 700;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto BoldItalic), url('#{$roboto-font-path}Roboto-BoldItalic.eot');
+    src: url("#{$roboto-font-path}Roboto-BoldItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-BoldItalic.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-BoldItalic.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-BoldItalic.ttf") format("truetype");
+
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto Black), url('#{$roboto-font-path}Roboto-Black.eot');
+    src: url("#{$roboto-font-path}Roboto-Black.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-Black.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-Black.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-Black.ttf") format("truetype");
+
+    font-weight: 900;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local(Roboto BlackItalic), url('#{$roboto-font-path}Roboto-BlackItalic.eot');
+    src: url("#{$roboto-font-path}Roboto-BlackItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$roboto-font-path}Roboto-BlackItalic.woff2") format("woff2"),
+        url("#{$roboto-font-path}Roboto-BlackItalic.woff") format("woff"),
+        url("#{$roboto-font-path}Roboto-BlackItalic.ttf") format("truetype");
+
+    font-weight: 900;
+    font-style: italic;
+}
+
+
+
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans Light), url('#{$open-sans-font-path}OpenSans-Light.eot');
+    src: url("#{$open-sans-font-path}OpenSans-Light.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-Light.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-Light.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-Light.ttf") format("truetype");
+
+    font-weight: 300;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans LightItalic), url('#{$open-sans-font-path}OpenSans-LightItalic.eot');
+    src: url("#{$open-sans-font-path}OpenSans-LightItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-LightItalic.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-LightItalic.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-LightItalic.ttf") format("truetype");
+
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans Regular), url('#{$open-sans-font-path}OpenSans-Regular.eot');
+    src: url("#{$open-sans-font-path}OpenSans-Regular.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-Regular.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-Regular.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-Regular.ttf") format("truetype");
+
+    font-weight: 400;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans RegularItalic), url('#{$open-sans-font-path}OpenSans-RegularItalic.eot');
+    src: url("#{$open-sans-font-path}OpenSans-RegularItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-RegularItalic.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-RegularItalic.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-RegularItalic.ttf") format("truetype");
+
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans SemiBold), url('#{$open-sans-font-path}OpenSans-SemiBold.eot');
+    src: url("#{$open-sans-font-path}OpenSans-SemiBold.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-SemiBold.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-SemiBold.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-SemiBold.ttf") format("truetype");
+
+    font-weight: 600;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans SemiBoldItalic), url('#{$open-sans-font-path}OpenSans-SemiBoldItalic.eot');
+    src: url("#{$open-sans-font-path}OpenSans-SemiBoldItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-SemiBoldItalic.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-SemiBoldItalic.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-SemiBoldItalic.ttf") format("truetype");
+
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans Bold), url('#{$open-sans-font-path}OpenSans-Bold.eot');
+    src: url("#{$open-sans-font-path}OpenSans-Bold.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-Bold.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-Bold.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-Bold.ttf") format("truetype");
+
+    font-weight: 700;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans BoldItalic), url('#{$open-sans-font-path}OpenSans-BoldItalic.eot');
+    src: url("#{$open-sans-font-path}OpenSans-BoldItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-BoldItalic.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-BoldItalic.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-BoldItalic.ttf") format("truetype");
+
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans ExtraBold), url('#{$open-sans-font-path}OpenSans-ExtraBold.eot');
+    src: url("#{$open-sans-font-path}OpenSans-ExtraBold.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-ExtraBold.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-ExtraBold.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-ExtraBold.ttf") format("truetype");
+        
+    font-weight: 800;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local(OpenSans ExtraBoldItalic), url('#{$open-sans-font-path}OpenSans-ExtraBoldItalic.eot');
+    src: url("#{$open-sans-font-path}OpenSans-ExtraBoldItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$open-sans-font-path}OpenSans-ExtraBoldItalic.woff2") format("woff2"),
+        url("#{$open-sans-font-path}OpenSans-ExtraBoldItalic.woff") format("woff"),
+        url("#{$open-sans-font-path}OpenSans-ExtraBoldItalic.ttf") format("truetype");
+        
+    font-weight: 800;
+    font-style: italic;
+}
+
+
+
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito Light), url('#{$nunito-font-path}Nunito-Light.eot');
+    src: url("#{$nunito-font-path}Nunito-Light.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-Light.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-Light.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-Light.ttf") format("truetype");
+
+    font-weight: 300;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito LightItalic), url('#{$nunito-font-path}Nunito-LightItalic.eot');
+    src: url("#{$nunito-font-path}Nunito-LightItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-LightItalic.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-LightItalic.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-LightItalic.ttf") format("truetype");
+
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito Regular), url('#{$nunito-font-path}Nunito-Regular.eot');
+    src: url("#{$nunito-font-path}Nunito-Regular.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-Regular.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-Regular.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-Regular.ttf") format("truetype");
+
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito Italic), url('#{$nunito-font-path}Nunito-Italic.eot');
+    src: url("#{$nunito-font-path}Nunito-Italic.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-Italic.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-Italic.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-Italic.ttf") format("truetype");
+
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito SemiBold), url('#{$nunito-font-path}Nunito-SemiBold.eot');
+    src: url("#{$nunito-font-path}Nunito-SemiBold.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-SemiBold.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-SemiBold.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-SemiBold.ttf") format("truetype");
+
+    font-weight: 600;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito SemiBoldItalic), url('#{$nunito-font-path}Nunito-SemiBoldItalic.eot');
+    src: url("#{$nunito-font-path}Nunito-SemiBoldItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-SemiBoldItalic.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-SemiBoldItalic.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-SemiBoldItalic.ttf") format("truetype");
+
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito Bold), url('#{$nunito-font-path}Nunito-Bold.eot');
+    src: url("#{$nunito-font-path}Nunito-Bold.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-Bold.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-Bold.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-Bold.ttf") format("truetype");
+
+    font-weight: 700;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito BoldItalic), url('#{$nunito-font-path}Nunito-BoldItalic.eot');
+    src: url("#{$nunito-font-path}Nunito-BoldItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-BoldItalic.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-BoldItalic.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-BoldItalic.ttf") format("truetype");
+
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito ExtraBold), url('#{$nunito-font-path}Nunito-ExtraBold.eot');
+    src: url("#{$nunito-font-path}Nunito-ExtraBold.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-ExtraBold.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-ExtraBold.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-ExtraBold.ttf") format("truetype");
+        
+    font-weight: 800;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito ExtraBoldItalic), url('#{$nunito-font-path}Nunito-ExtraBoldItalic.eot');
+    src: url("#{$nunito-font-path}Nunito-ExtraBoldItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-ExtraBoldItalic.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-ExtraBoldItalic.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-ExtraBoldItalic.ttf") format("truetype");
+        
+    font-weight: 800;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito Black), url('#{$nunito-font-path}Nunito-Black.eot');
+    src: url("#{$nunito-font-path}Nunito-Black.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-Black.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-Black.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-Black.ttf") format("truetype");
+        
+    font-weight: 900;
+}
+@font-face {
+    font-family: "Nunito";
+    src: local(Nunito BlackItalic), url('#{$nunito-font-path}Nunito-BlackItalic.eot');
+    src: url("#{$nunito-font-path}Nunito-BlackItalic.eot?#iefix") format('embedded-opentype'),
+        url("#{$nunito-font-path}Nunito-BlackItalic.woff2") format("woff2"),
+        url("#{$nunito-font-path}Nunito-BlackItalic.woff") format("woff"),
+        url("#{$nunito-font-path}Nunito-BlackItalic.ttf") format("truetype");
+        
+    font-weight: 900;
+    font-style: italic;
+}

@@ -21,7 +21,8 @@
     "react-dropzone": "^11.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-select": "^3.1.0"
+    "react-select": "^3.1.0",
+    "use-debounce": "^3.4.2"
   },
   "scripts": {
     "start": "PORT=80 HTTPS=true react-scripts start",

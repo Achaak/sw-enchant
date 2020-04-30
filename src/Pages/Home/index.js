@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import {  } from './../../Components'
+import { DefaultPage } from './../../Components'
+import { Grid } from '@material-ui/core';
 
+import './Home.scss'
 
 const Home = ({ setJson }) => {
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
@@ -32,15 +34,19 @@ const Home = ({ setJson }) => {
 
 
   return (
-    <div 
-      {...getRootProps({className: 'dropzone'})}
-    >
-      <input
-        {...getInputProps()} 
-        multiple={false}
-      />
-      <p>Drag 'n' drop some files here, or click to select files</p>
-    </div>
+    <DefaultPage className="home-screen">
+      <Grid item xs={6}>
+        <div 
+          {...getRootProps({className: 'dropzone'})}
+        >
+          <input
+            {...getInputProps()} 
+            multiple={false}
+          />
+          <p>Drop your json files here, or click to select this</p>
+        </div>
+      </Grid>
+    </DefaultPage>
   )
 }
 

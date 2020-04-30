@@ -18,6 +18,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
+import './Table.scss'
+
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -39,60 +41,69 @@ const tableIcons = {
 };
 
 const Table = ({
-  title, columns, data, isLoading, pageSize, 
+  title, columns, data, isLoading, pageSize, search, showTitle, header, toolbar, exportButton, exportCsv, exportName, 
   onRowAdd, onRowUpdate, onRowDelete,
-  addButton, updateButton, deleteButton
+  addButton, updateButton, deleteButton,
 }) => {
   return (
-    <MaterialTable
-      icons={tableIcons}
-      title={title}
-      columns={columns}
-      data={data}
-      isLoading={isLoading}
-      localization={{
-        body: {
-          editRow: {
-            deleteText: "Voulez-vous vraiment supprimer cette ligne ?",
-            cancelTooltip: 'Annuler',
-            saveTooltip: 'Valider'
+    <div className="table-default">
+      <MaterialTable
+        icons={tableIcons}
+        title={title}
+        columns={columns}
+        data={data}
+        isLoading={isLoading}
+        localization={{
+          body: {
+            editRow: {
+              deleteText: "Voulez-vous vraiment supprimer cette ligne ?",
+              cancelTooltip: 'Annuler',
+              saveTooltip: 'Valider'
+            },
+            addTooltip: 'Ajouter',
+            deleteTooltip: 'Supprimer',
+            editTooltip: 'Modifier',
           },
-          addTooltip: 'Ajouter',
-          deleteTooltip: 'Supprimer',
-          editTooltip: 'Modifier',
-        },
-        pagination: {
-          labelRowsSelect: "lignes",
-          firstAriaLabel: 'Première page',
-          firstTooltip: 'Première page',
-          previousAriaLabel: 'Page précédente',
-          previousTooltip: 'Page précédente',
-          nextAriaLabel: 'Page suivante',
-          nextTooltip: 'Page suivante',
-          lastAriaLabel: 'Dernière page',
-          lastTooltip: 'Dernière page',
-        },
-        toolbar: {
-          searchTooltip: 'Rechercher',
-          searchPlaceholder: 'Rechercher'
-        }
-      }}
-      options={{
-        showEmptyDataSourceMessage: false,
-        pageSize: pageSize,
-      }}
-      editable={{
-        onRowAdd: (addButton ? async (newData) => {
-          await onRowAdd(newData)
-        } : undefined),
-        onRowUpdate: (updateButton ? async (newData, oldData) => {
-          await onRowUpdate(newData, oldData)
-        } : undefined),
-        onRowDelete: (deleteButton ? async (oldData) => {
-          await onRowDelete(oldData)
-        } : undefined),
-      }}
-    />
+          pagination: {
+            labelRowsSelect: "lignes",
+            firstAriaLabel: 'Première page',
+            firstTooltip: 'Première page',
+            previousAriaLabel: 'Page précédente',
+            previousTooltip: 'Page précédente',
+            nextAriaLabel: 'Page suivante',
+            nextTooltip: 'Page suivante',
+            lastAriaLabel: 'Dernière page',
+            lastTooltip: 'Dernière page',
+          },
+          toolbar: {
+            searchTooltip: 'Rechercher',
+            searchPlaceholder: 'Rechercher',
+            exportName: exportName,
+          }
+        }}
+        options={{
+          showEmptyDataSourceMessage: false,
+          pageSize: pageSize,
+          search: search,
+          showTitle: showTitle,
+          header: header,
+          toolbar: toolbar,
+          exportButton: exportButton,
+          exportCsv: exportCsv,
+        }}
+        editable={{
+          onRowAdd: (addButton ? async (newData) => {
+            await onRowAdd(newData)
+          } : undefined),
+          onRowUpdate: (updateButton ? async (newData, oldData) => {
+            await onRowUpdate(newData, oldData)
+          } : undefined),
+          onRowDelete: (deleteButton ? async (oldData) => {
+            await onRowDelete(oldData)
+          } : undefined),
+        }}
+      />
+    </div>
   )
 }
 
@@ -108,6 +119,13 @@ Table.propTypes = {
   onRowDelete: PropTypes.func,
   deleteButton: PropTypes.bool,
   pageSize: PropTypes.number,
+  search: PropTypes.bool,
+  showTitle: PropTypes.bool,
+  header: PropTypes.bool,
+  toolbar: PropTypes.bool,
+  exportButton: PropTypes.bool,
+  exportCsv: PropTypes.func,
+  exportName: PropTypes.string,
 }
 
 Table.defaultProps = {
@@ -122,6 +140,13 @@ Table.defaultProps = {
   onRowDelete: () => {},
   deleteButton: true,
   pageSize: 5,
+  search: true,
+  showTitle: true,
+  header: true,
+  toolbar: true,
+  exportButton: false,
+  exportCsv: () => {},
+  exportName: "",
 };
 
 export default Table

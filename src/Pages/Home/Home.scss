@@ -1,0 +1,14 @@
+@import './../../Services/Styles/Colors.scss';
+
+.home-screen {
+  .dropzone {
+    background-color: $tertiary-color;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+}
