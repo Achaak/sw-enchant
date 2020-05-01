@@ -4,7 +4,6 @@ import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -13,6 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const NewDialog = ({ 
   open,
+  dialogTitle, dialogContent, dialogActions,
   children,
 }) => {
   const handleClose = () => {
@@ -28,15 +28,16 @@ const NewDialog = ({
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-slide-title">
+        { dialogTitle }
+      </DialogTitle>
+
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
-          Let Google help apps determine location. This means sending anonymous location data to
-          Google, even when no apps are running.
-        </DialogContentText>
+        { dialogContent }
       </DialogContent>
+
       <DialogActions>
-      
+        { dialogActions }
       </DialogActions>
     </Dialog>
   );
@@ -44,10 +45,16 @@ const NewDialog = ({
 
 NewDialog.propTypes = {
   open: PropTypes.bool,
+  dialogTitle: PropTypes.object,
+  dialogContent: PropTypes.object,
+  dialogActions: PropTypes.object,
 }
 
 NewDialog.defaultProps = {
-  open: false
+  open: false,
+  dialogTitle: (<></>),
+  dialogContent: (<></>),
+  dialogActions: (<></>),
 };
 
 export default NewDialog

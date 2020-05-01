@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 
 import { DefaultPage, Slider } from './../../Components'
 
-const Tools = ({ statsValue, setStatValue, resetStatValue }) => {
+const Tools = () => {
+  const [statsValue] = useState(global.SWManager.getStatsValue());
 
   const sliderRender = () => {
     let _sliderRender = []
@@ -14,7 +15,7 @@ const Tools = ({ statsValue, setStatValue, resetStatValue }) => {
           key={key}
           name={key}
           label={`${key.replace(" flat", "")}`}
-          onChange={setStatValue}
+          onChange={(value, name) => global.SWManager.setStatValue(value, name)}
           step={0.1}
           min={0}
           max={3}

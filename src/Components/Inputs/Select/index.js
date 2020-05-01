@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Select from "react-select"
 
 const NewSelect = ({ 
-  options, noOptionsMessage, className, placeholder, label, onChange, onBlur, name, required, value, isMulti,
+  options, noOptionsMessage, className, placeholder, label, onChange, onBlur, name, required, value, isMulti, defaultValue,
   ...props
 }) => {
   const handleChange = (value) => {
@@ -12,6 +12,7 @@ const NewSelect = ({
 
   return (
     <Select
+      defaultValue={defaultValue}
       noOptionsMessage={noOptionsMessage}
       options={options}
       placeholder={placeholder}
@@ -35,6 +36,7 @@ NewSelect.propTypes = {
   required: PropTypes.bool,
   value: PropTypes.any,
   isMulti: PropTypes.bool,
+  defaultValue: PropTypes.any,
 }
 
 NewSelect.defaultProps = {
@@ -48,6 +50,7 @@ NewSelect.defaultProps = {
   required: false,
   value: {},
   isMulti: false,
+  defaultValue: []
 };
 
 export default NewSelect

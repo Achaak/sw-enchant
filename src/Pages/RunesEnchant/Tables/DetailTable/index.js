@@ -1,13 +1,16 @@
 import React from 'react';
 
 import { Table, DefaultPage } from './../../../../Components'
-import { RunesFormat } from './../../../../Services'
+import { RunesInfos } from './../../../../Services/SWManager'
 import { Grid } from '@material-ui/core';
 import classnames from 'classnames'
 
 //import './RuneEnchant.scss'
 
-const RunesEnchant = ({ runes, runesLoading }) => {
+const RunesEnchant = ({ 
+  data, tableRef,
+  runesLoading, showEnchantDialog,
+}) => {
 
   const utilitiesRender = (item) => {
     let _utilities = []
@@ -44,7 +47,7 @@ const RunesEnchant = ({ runes, runesLoading }) => {
   }
 
   const statRender = (item, variable) => {
-    const _substatFormat = RunesFormat.getSubstatFormat(item.sec_eff, variable)
+    const _substatFormat = RunesInfos.getRuneSubstatString(item.sec_eff, variable)
     
     if(_substatFormat)
       return (
@@ -90,7 +93,8 @@ const RunesEnchant = ({ runes, runesLoading }) => {
             { title: 'Enchantment advice',  field: 'enchant_advice', type: 'string', render: enchantsAdviceRender },
             { title: 'Utilities', field: 'utilities', type: 'string', render: utilitiesRender },
           ]}
-          data={runes}
+          tableRef={tableRef}
+          data={data}
           isLoading={runesLoading}
           pageSize={10}
           addButton={false}

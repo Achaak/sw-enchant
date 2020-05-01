@@ -1,11 +1,7 @@
-import RunesFormat from './RunesFormat'
-import RuneCraftFormat from './RuneCraftFormat'
-import RunesInfos from './RunesInfos'
 import LocalStorage from './LocalStorage'
+import SWManager from './SWManager'
 
 export {
-  RunesInfos,
-  RunesFormat,
-  RuneCraftFormat,
-  LocalStorage
+  LocalStorage,
+  SWManager
 }

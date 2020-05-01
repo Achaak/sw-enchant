@@ -42,17 +42,19 @@ const tableIcons = {
 
 const Table = ({
   title, columns, data, isLoading, pageSize, search, showTitle, header, toolbar, exportButton, exportCsv, exportName, 
-  onRowAdd, onRowUpdate, onRowDelete,
+  onRowAdd, onRowUpdate, onRowDelete, tableRef, onChangePage,
   addButton, updateButton, deleteButton,
 }) => {
   return (
     <div className="table-default">
       <MaterialTable
+        tableRef={tableRef}
         icons={tableIcons}
         title={title}
         columns={columns}
         data={data}
         isLoading={isLoading}
+        onChangePage={onChangePage}
         localization={{
           body: {
             editRow: {
@@ -110,7 +112,7 @@ const Table = ({
 Table.propTypes = {
   title: PropTypes.string,
   columns: PropTypes.array,
-  data: PropTypes.array,
+  data: PropTypes.any,
   isLoading: PropTypes.bool,
   onRowAdd: PropTypes.func,
   addButton: PropTypes.bool,
@@ -126,6 +128,7 @@ Table.propTypes = {
   exportButton: PropTypes.bool,
   exportCsv: PropTypes.func,
   exportName: PropTypes.string,
+  onChangePage: PropTypes.func,
 }
 
 Table.defaultProps = {
@@ -147,6 +150,7 @@ Table.defaultProps = {
   exportButton: false,
   exportCsv: () => {},
   exportName: "",
+  onChangePage: () => {},
 };
 
 export default Table

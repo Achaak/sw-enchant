@@ -6,7 +6,10 @@ import classnames from 'classnames'
 
 //import './RuneEnchant.scss'
 
-const RunesEnchant = ({ runes, runesLoading }) => {
+const RunesEnchant = ({ 
+  data, tableRef,
+  runesLoading, showEnchantDialog
+}) => {
 
   const utilitiesRender = (item) => {
     let _utilities = []
@@ -33,7 +36,7 @@ const RunesEnchant = ({ runes, runesLoading }) => {
         
         _enchantAdvice.push(
           <li key={`${i}-${j}`}>
-            <button onClick={() => console.log(_enchant.oldStat, _enchant.newStats)}>up</button>
+            {(_enchant.hasEnchant ? (<button onClick={() => showEnchantDialog(item.rune_id, _enchant.hasEnchant, _enchant.oldStat, item[_enchant.oldStat])}>up</button>) : null)}
             { `${_enchant_advice.label}: ${_enchant.oldStat.replace(" flat", "")} ➔ ${_enchant.newStats.replace(" flat", "")}` }
           </li>
         )
@@ -87,7 +90,8 @@ const RunesEnchant = ({ runes, runesLoading }) => {
             { title: 'Enchantment advice',  field: 'enchant_advice', type: 'string', render: enchantsAdviceRender },
             { title: 'Utilities', field: 'utilities', type: 'string', render: utilitiesRender },
           ]}
-          data={runes}
+          tableRef={tableRef}
+          data={data}
           isLoading={runesLoading}
           pageSize={10}
           addButton={false}

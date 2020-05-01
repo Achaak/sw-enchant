@@ -1,6 +1,6 @@
 import { Table } from './Tables' 
 import Header from './Header'
-import { Select, Switch, Slider } from './Inputs'
+import { Select, Switch, Slider, Input, Button } from './Inputs'
 import { DefaultPage } from './Pages'
 import { Dialog } from './Dialogs'
 
@@ -12,6 +12,8 @@ export {
   Select,
   Switch,
   Slider,
+  Input,
+  Button,
 
   // PAGES
   DefaultPage,

@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 
 import './Home.scss'
 
-const Home = ({ setJson }) => {
+const Home = () => {
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
   useEffect(() => {
@@ -24,10 +24,8 @@ const Home = ({ setJson }) => {
 
       const _json = JSON.parse(_text)
 
-      console.log(_json)
-
       // Set json file
-      setJson(_json)
+      global.SWManager.setJson(_json)
     };
     reader.readAsText(file)
   }

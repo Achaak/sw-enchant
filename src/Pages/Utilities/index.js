@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { useDropzone } from 'react-dropzone';
 
 import { Table, Select, DefaultPage } from './../../Components'
 
 const SelectStats = ({
-  setUtilities,
+  setUtilities, value,
   ...props
 }) => {
   return (
     <Select
       {...props}
+      defaultValue={(value ? value : [])}
       options={[
         { value: 'ATK%',     label: 'ATK%'     },
         { value: 'ATK flat', label: 'ATK flat' },
@@ -29,10 +30,9 @@ const SelectStats = ({
   )
 }
 
-const Utilities = ({ 
-  setUtility, deleteUtility, utilities, setUtilities
-}) => {
+const Utilities = () => {
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+  const [utilities, setUtilities] = useState(global.SWManager.getUtilities());
 
   useEffect(() => {
     // Get file and read this
@@ -49,10 +49,11 @@ const Utilities = ({
 
       const _json = JSON.parse(_text)
 
-      console.log(_json)
-
       // Set json file
-      setUtilities(_json)
+      global.SWManager.setUtilities(_json)
+        .then((values) => {
+          setUtilities(values.utilities)
+        })
     };
     reader.readAsText(file)
   }
@@ -81,7 +82,7 @@ const Utilities = ({
           columns={[
             { title: 'Id', field: 'rune_id', type: 'numeric', hidden: true },
             { title: 'Name', field: 'name',  type: 'string' },
-            { title: 'Stats', field: 'stats',  type: 'string', editComponent: props => (<SelectStats {...props} />), render: getStatsRender},
+            { title: 'Stats', field: 'stats_input',  type: 'string', editComponent: props => (<SelectStats {...props} />), render: getStatsRender},
             { title: 'Number of stats', field: 'nb_stats',  type: 'numeric' },
           ]}
           data={utilities}
@@ -89,13 +90,39 @@ const Utilities = ({
           title="Utilities list"
           pageSize={10}
           onRowAdd={(item) => {
-            setUtility({
+            global.SWManager.setUtility({
               name: item.name,
-              stats: (item.stats ? item.stats.map((o) => o.value) : []),
-              nb_stats: item.nb_stats || 0
+              stats: (item.stats_input ? item.stats_input.map((o) => o.value) : []),
+              stats_input: item.stats_input || [],
+              nb_stats: item.nb_stats || 0,
+              id: Date.now(),
             })
+              .then((values) => {
+                setUtilities(values.utilities)
+              })
           }}
-          onRowDelete={deleteUtility}
+          onRowUpdate={
+            (item) => {
+              global.SWManager.updateUtility({
+                name: item.name,
+                stats: (item.stats_input ? item.stats_input.map((o) => o.value) : []),
+                stats_input: item.stats_input || [],
+                nb_stats: item.nb_stats || 0,
+                id: item.id,
+              }, item.id)
+                .then((values) => {
+                  setUtilities(values.utilities)
+                })
+            }
+          }
+          onRowDelete={
+            (item) => {
+              global.SWManager.deleteUtility(item.id)
+                .then((values) => {
+                  setUtilities(values.utilities)
+                })
+            }
+          }
           exportButton
           exportCsv={exportCsv}
           exportName='Export as Json'
